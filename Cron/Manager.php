@@ -42,6 +42,7 @@ class Manager
         return $this->manager->getRepository(CronJob::class);
     }
 
+
     /**
      * @param JobReport[] $reports
      */
