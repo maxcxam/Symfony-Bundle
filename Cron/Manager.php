@@ -52,6 +52,7 @@ class Manager
             $connection->close();
             $connection->connect();
         }
+
         foreach ($reports as $report) {
             $output = implode("\n", (array) $report->getOutput());
             if(empty($output)) continue;
