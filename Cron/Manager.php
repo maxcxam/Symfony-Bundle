@@ -53,11 +53,13 @@ class Manager
             $connection->connect();
         }
         foreach ($reports as $report) {
+            $output = implode("\n", (array) $report->getOutput());
+            if(empty($output)) continue;
             $dbReport = new CronReport();
             $dbReport->setJob($report->getJob()->raw);
-            $dbReport->setOutput(implode("\n", (array) $report->getOutput()));
+            $dbReport->setOutput($output);
             $dbReport->setExitCode($report->getJob()->getProcess()->getExitCode());
-            $dbReport->setRunAt(\DateTime::createFromFormat('U.u', number_format($report->getStartTime(), 6, '.', '')));
+            $dbReport->setRunAt(new \DateTime());
             $dbReport->setRunTime($report->getEndTime() - $report->getStartTime());
             $this->manager->persist($dbReport);
         }
