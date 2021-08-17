@@ -48,6 +48,7 @@ class Manager
     public function saveReports(array $reports)
     {
         $connection = $this->manager->getConnection();
+
         if($connection instanceof Connection && false === $connection->ping()){
             $connection->close();
             $connection->connect();
